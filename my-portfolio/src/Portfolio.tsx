@@ -4,7 +4,7 @@ import profilehero from "./assets/balkis_img.png";
 import project1 from "./assets/autoxpress.png";
 import project2 from "./assets/tektai.png";
 import profileImg  from "./assets/me_graduated.jpg";
-import { FaEnvelope, FaPhone, FaMapMarkerAlt ,FaArrowLeft, FaArrowRight, FaDownload, FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaHome, FaUser, FaLaptopCode, FaFolderOpen,FaEnvelope, FaPhone, FaMapMarkerAlt ,FaArrowLeft, FaArrowRight, FaDownload, FaGithub, FaLinkedin } from "react-icons/fa";
 
 export default function App() {
 
@@ -182,17 +182,26 @@ useEffect(() => {
   ↑
 </button>
 
-      {/* Header */}
-      <header>
-        <h1>Bika.dev</h1>
-        <nav>
-          <a href="#hero">Home</a>
-          <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
-        </nav>
-      </header>
+ <header>
+  <h1>Balkis.dev</h1>
+  <nav className="desktop-nav">
+    <a href="#hero">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  {/* Mobile Bottom Nav */}
+  <nav className="mobile-nav">
+    <a href="#hero"><FaHome /></a>
+    <a href="#about"><FaUser /></a>
+    <a href="#skills"><FaLaptopCode /></a>
+    <a href="#projects"><FaFolderOpen /></a>
+    <a href="#contact"><FaEnvelope /></a>
+  </nav>
+</header>
+
 
       {/* Hero */}
     <div>
@@ -521,7 +530,7 @@ useEffect(() => {
 
 
       {/* Footer */}
-      <footer>© {new Date().getFullYear()} Balkis</footer>
+      <footer>© {new Date().getFullYear()} All rights reserved - Balkis</footer>
     </div>
   );
 }
