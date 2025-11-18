@@ -8,11 +8,7 @@ import profileImg  from "./assets/me_graduated.jpg";
 import { FaArrowLeft, FaArrowRight, FaDownload, FaGithub, FaLinkedin } from "react-icons/fa";
 
 export default function App() {
-  const projectss = [
-    { image: project1, title: "Project 1", description: "Description 1", github: "#" },
-    { image: project2, title: "Project 2", description: "Description 2", github: "#" },
-    // add more projects here
-  ];
+
 
 interface Project {
   title: string;
@@ -107,9 +103,6 @@ const projects = projectsData[category];
 
   const [form, setForm] = useState({ Name: "", Email: "", Message: "" });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
 
   const [successMessage, setSuccessMessage] = useState("");
   const [showMessage, setShowMessage] = useState<boolean>(false);
