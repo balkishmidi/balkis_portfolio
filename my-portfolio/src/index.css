@@ -949,6 +949,21 @@ background: linear-gradient(90deg, #ff4ec5, #b13cff);
   font-size: 14px;
   color: #2B641E;
 }
+
+
+@media (max-width: 768px) {
+  .success {
+    top: 60px; /* give space from top header */
+  }
+}
+
+
+
+
+
+
+
+
 .reveal-section {
   opacity: 0;
   transform: translateY(50px); /* start slightly below */
