@@ -101,9 +101,9 @@ const projects = projectsData[category];
 
 
 
-  const [form, setForm] = useState({ Name: "", Email: "", Message: "" });
+ /*  const [form, setForm] = useState({ Name: "", Email: "", Message: "" });
 
-
+ */
   const [successMessage, setSuccessMessage] = useState("");
   const [showMessage, setShowMessage] = useState<boolean>(false);
 
