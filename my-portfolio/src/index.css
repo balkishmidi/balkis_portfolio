@@ -6,15 +6,134 @@ body, html {
   background: linear-gradient(180deg, #000000, #4c1d95, #000000);
   color: white;
   min-height: 100vh;
+  scroll-behavior: smooth;
+
+}
+.app-wrapper {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
 }
 
-a {
-  color: #c084fc;
-  text-decoration: none;
-  font-weight: 500;
+/* FULL-PAGE FLOATING BLOBS */
+.floating-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
 }
-a:hover {
-  color: #e0aaff;
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.55;
+  filter: blur(70px); /* less blur */
+  animation: wander 28s infinite ease-in-out;
+}
+
+/* -------------------------
+   Sizes
+-------------------------- */
+
+.small {
+  width: 180px;
+  height: 180px;
+}
+
+.medium {
+  width: 260px;
+  height: 260px;
+}
+
+.large {
+  width: 350px;
+  height: 350px;
+}
+
+/* -------------------------
+   Colors
+-------------------------- */
+
+.pink {
+  background: radial-gradient(circle, rgba(255, 120, 201, 0.918), rgba(255, 50, 159, 0.922));
+}
+
+.blue {
+  background: radial-gradient(circle, rgba(80, 159, 255, 0.95), rgba(30, 81, 200, 0.74));
+}
+
+.purple {
+  background: radial-gradient(circle, rgb(180, 100, 255), rgba(109, 40, 200, 0.767));
+}
+
+/* -------------------------
+   Starting positions
+-------------------------- */
+
+.blob:nth-child(1) { top: 10%; left: 5%; animation-duration: 26s; }
+.blob:nth-child(2) { top: 55%; left: 60%; animation-duration: 30s; }
+.blob:nth-child(3) { top: 20%; left: 80%; animation-duration: 34s; }
+
+/* -------------------------
+   Animation: Full screen wandering
+-------------------------- */
+
+@keyframes wander {
+  0%   { transform: translate(0, 0) scale(1); }
+  25%  { transform: translate(40vw, -25vh) scale(1.15); }
+  50%  { transform: translate(-35vw, 30vh) scale(0.95); }
+  75%  { transform: translate(20vw, 45vh) scale(1.1); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+
+/* Nav links default */
+header nav a {
+  margin-left: 1rem;
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  position: relative;
+  transition: 0.3s;
+}
+
+/* Neon hover effect */
+header nav a:hover {
+  color: #c084fc; /* neon purple */
+  text-shadow: 
+    0 0 5px #c084fc,
+    0 0 10px #ff4ec5,
+    0 0 15px #c084fc,
+    0 0 20px #ff4ec5;
+}
+
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #c084fc, #ff4ec5);
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  box-shadow: 0 0 15px rgba(255, 78, 197, 0.5);
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.scroll-to-top:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px rgba(255, 78, 197, 0.8);
 }
 
 /* Header */
@@ -42,6 +161,7 @@ h2, h3 { color: #c084fc; margin-bottom: 1rem; }
   flex-direction: column;
   align-items: center;
   text-align: center;
+  margin-top:5rem;
 }
 #hero h2 { font-size: 3rem; margin-bottom: 0.5rem; }
 #hero p { font-size: 1.2rem; margin-bottom: 1rem; }
@@ -132,7 +252,7 @@ footer { text-align: center; padding: 2rem 0; color: #aaa; }
   height: 300px;
   border-radius: 50%;
   object-fit: cover;
-  border: 5px solid #c084fc;
+  border: 1px solid #c084fc;
   box-shadow: 0 0 20px #ff4ec5, 0 0 40px #b13cff;
 }
 
@@ -425,7 +545,7 @@ footer { text-align: center; padding: 2rem 0; color: #aaa; }
   text-align: center;
   font-size: 2.5rem;
   margin-bottom: 2rem;
-  color: #c084fc;
+  color: white;
 }
 
 /* Slider container */
@@ -516,7 +636,7 @@ footer { text-align: center; padding: 2rem 0; color: #aaa; }
 #projects .section-title {
   text-align: center;
   font-size: 2.5rem;
-  color: #c084fc;
+  color: white;
   margin-bottom: 2rem;
 }
 
@@ -616,6 +736,7 @@ footer { text-align: center; padding: 2rem 0; color: #aaa; }
   font-size: 3rem;
   margin-bottom: 3rem;
   font-weight: bold;
+  color: white;
 }
 
 /* Main Grid */
@@ -773,4 +894,79 @@ background: linear-gradient(90deg, #ff4ec5, #b13cff);
   font-weight: 500;
   font-size: 14px;
   color: #2B641E;
+}
+.reveal-section {
+  opacity: 0;
+  transform: translateY(50px); /* start slightly below */
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal-section.active {
+  opacity: 1;
+  transform: translateY(0); /* move into place */
+}
+
+
+.hero-orbit-wrapper {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  margin: auto;
+}
+
+.hero-image {
+  width: 100%;
+  border-radius: 15px;
+  position: relative;
+  z-index: 2;
+
+}
+
+.orbit-container {
+  position: absolute;
+  top: 60%;
+  left: 60%;
+  width: 0;
+  height: 0;
+  z-index: 3;
+  transform: translate(-50%, -50%);
+  animation: rotate-orbit 20s linear infinite;
+}
+
+.orbit-logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  margin: -25px; /* center logos on orbit */
+}
+
+.orbit-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Rotate entire orbit */
+@keyframes rotate-orbit {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.logo-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;       /* makes it a circle */
+  background-color: #333;   /* dark gray background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.6); /* shadow around circle */
+}
+
+.logo-circle img {
+  width: 35px;   /* size of the actual logo inside */
+  height: 35px;
+  object-fit: contain;
 }

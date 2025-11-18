@@ -4,8 +4,7 @@ import profilehero from "./assets/balkis_img.png";
 import project1 from "./assets/autoxpress.png";
 import project2 from "./assets/tektai.png";
 import profileImg  from "./assets/me_graduated.jpg";
-
-import { FaArrowLeft, FaArrowRight, FaDownload, FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaEnvelope, FaPhone, FaMapMarkerAlt ,FaArrowLeft, FaArrowRight, FaDownload, FaGithub, FaLinkedin } from "react-icons/fa";
 
 export default function App() {
 
@@ -20,6 +19,28 @@ interface Project {
 type ProjectCategory = "academic" | "professional";
 const [category, setCategory] = useState<ProjectCategory>("academic");
 const [currentSlide, setCurrentSlide] = useState<number>(0);
+useEffect(() => {
+  const sections = document.querySelectorAll(".reveal-section");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        } else {
+          entry.target.classList.remove("active"); // optional: hide when out of view
+        }
+      });
+    },
+    { threshold: 0.2 } // 20% of section visible
+  );
+
+  sections.forEach((section) => observer.observe(section));
+
+  return () => {
+    sections.forEach((section) => observer.unobserve(section));
+  };
+}, []);
 
 
 /*   const projectsDatas = {
@@ -133,8 +154,34 @@ const projects = projectsData[category];
     setTimeout(() => setShowMessage(false), 3000); // hide after 3s
   }
 };
+
+const [showScroll, setShowScroll] = useState(false);
+
+useEffect(() => {
+  const handleScroll = () => {
+    setShowScroll(window.scrollY > 300); // show button after 300px scroll
+  };
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
+
   return (
-    <div>
+  <div className="app-wrapper">
+<div className="floating-bg">
+  <div className="blob pink small"></div>
+  <div className="blob blue medium"></div>
+  <div className="blob purple large"></div>
+</div>
+
+{/* Scroll to top button */}
+<button 
+  className="scroll-to-top" 
+  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+  style={{ display: showScroll ? 'flex' : 'none' }}
+>
+  ↑
+</button>
+
       {/* Header */}
       <header>
         <h1>Bika.dev</h1>
@@ -175,14 +222,45 @@ const projects = projectsData[category];
 
 
  {/* Right image side */}
-  <div className="hero-right">
-  <img src={profilehero} alt="Balkis" />
+<div className="hero-right">
+  <div className="hero-orbit-wrapper">
+    <img src={profilehero} alt="Balkis" className="hero-image" />
+
+    <div className="orbit-container">
+      {[
+        "reactjs",
+        "typescript",
+        "springboot",
+        "angular",
+        "vuejs",
+        "symfony",
+        "powerplatform",
+      ].map((skill, idx, arr) => {
+        const angle = (360 / arr.length) * idx;
+        return (
+          <div
+            key={idx}
+            className="orbit-logo"
+            style={{
+              transform: `rotate(${angle}deg) translate(150px) rotate(-${angle}deg)`,
+            }}
+          >
+            <div className="logo-circle">
+    <img src={`/logos/${skill}.png`} alt={skill} />
   </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</div>
+
+
       </section>
     </div>
 
 {/* About Section */}
-<section id="about">
+<section id="about" className="reveal-section">
   {/* Section title */}
   <div className="about-title-container">
     <h3 className="about-title">About Me</h3>
@@ -222,7 +300,7 @@ const projects = projectsData[category];
 </section>
  
 
-<section id="bring-to-table">
+<section id="bring-to-table" className="reveal-section">
   <div className="bring-card">
     <h3>What I Bring to the Table</h3>
     <ul>
@@ -246,7 +324,7 @@ const projects = projectsData[category];
 
 
 
-<section id="skills">
+<section id="skills" className="reveal-section">
   <h3 className="section-title">Skills & Technologies</h3>
   <div className="skills-slider">
     <div className="skills-track">
@@ -299,7 +377,7 @@ const projects = projectsData[category];
 
 
 
-<section id="projects">
+<section id="projects" className="reveal-section">
   <h3 className="section-title">Projects</h3>
 
 <div className="project-buttons">
@@ -353,49 +431,38 @@ const projects = projectsData[category];
 
 
 
-      {/* Projects */}
-   {/*    <section id="projects">
-        <h3>Projects</h3>
-        <div className="project-slideshow">
-          {projects.map((proj, index) => (
-            <div className={`project-slide ${index === currentSlide ? "active" : ""}`} key={index}>
-              <img src={proj.image} alt={proj.title} />
-              <h4>{proj.title}</h4>
-              <p>{proj.description}</p>
-              <a href={proj.github} target="_blank">GitHub</a>
-            </div>
-          ))}
-        </div>
-      </section>
-
- */}
-
-
-
- <section id="contact" className="contact-section">
+ <section id="contact" className="contact-section reveal-section">
       <h3 className="contact-title">Contact Me</h3>
 
       <div className="contact-container">
-        {/* Left: contact info */}
-        <div className="contact-info">
-          <h4>Get In touch</h4>
-          <p>If you’d like to collaborate or hire me you can send a message!</p>
+   {/* Left: contact info */}
+<div className="contact-info">
+  <h4>Get In Touch</h4>
+  <p>If you’d like to collaborate or hire me, you can send a message!</p>
 
-          <div className="contact-item">
-            <span>📧</span>
-            <a href="mailto:balkis.hmidi@outlook.com">balkis.hmidi@outlook.com</a>
-          </div>
+  <div className="contact-item">
+    <FaEnvelope style={{ marginRight: "0.5rem" }} />
+    <a href="mailto:balkis.hmidi@outlook.com">balkis.hmidi@outlook.com</a>
+  </div>
+  <div className="contact-item">
+    <FaMapMarkerAlt style={{ marginRight: "0.5rem" }} />
+    <p>Borj Cedria, Tunisia</p>
+  </div>
 
-          <div className="contact-item">
-            <span>📍</span>
-            <p>Borj Cedria, Tunisia</p>
-          </div>
 
-          <div className="contact-item">
-            <span>💼</span>
-            <a href="https://www.linkedin.com/in/balkiss-hmidi/" target="_blank">LinkedIn Profile</a>
-          </div>
-        </div>
+  <div className="contact-item">
+    <FaPhone style={{ marginRight: "0.5rem" }} />
+    <img
+      src="/logos/tunisia.png"
+      alt="Tunisia"
+      style={{ width: "20px", marginRight: "0.5rem", verticalAlign: "middle" }}
+    />
+    <a href="tel:+21612345678">+216 12 345 678</a>
+  </div>
+
+
+ 
+</div>
 
   {/* Right: form */}
 
@@ -453,20 +520,8 @@ const projects = projectsData[category];
 
 
 
-      {/* Contact */}
-      <section id="contact">
-        <h3>Get in Touch</h3>
-        <p>Email: balkis.hmidi@outlook.com</p>
-        <p>Phone: +216 52259276</p>
-      </section>
-
-
-
-
-
-
       {/* Footer */}
-      <footer>© {new Date().getFullYear()} Bika</footer>
+      <footer>© {new Date().getFullYear()} Balkis</footer>
     </div>
   );
 }
