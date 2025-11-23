@@ -22,7 +22,7 @@ import project16 from "./assets/checker.jpg";
 
 
 import profileImg  from "./assets/me_graduated.jpg";
-import { FaHome, FaUser, FaLaptopCode, FaFolderOpen,FaEnvelope, FaPhone, FaMapMarkerAlt ,FaArrowLeft, FaArrowRight, FaDownload, FaGithub, FaLinkedin, FaExternalLinkSquareAlt, FaExternalLinkAlt } from "react-icons/fa";
+import { FaHome, FaUser, FaLaptopCode, FaFolderOpen,FaEnvelope, FaPhone, FaMapMarkerAlt ,FaArrowLeft, FaArrowRight, FaDownload, FaGithub, FaLinkedin, FaExternalLinkAlt } from "react-icons/fa";
 
 export default function App() {
 
