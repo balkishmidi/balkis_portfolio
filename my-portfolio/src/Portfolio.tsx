@@ -3,22 +3,45 @@ import "./index.css";
 import profilehero from "./assets/balkis_img.png";
 import project1 from "./assets/autoxpress.png";
 import project2 from "./assets/tektai.png";
+import project3 from "./assets/cinematch-logo.jpeg";
+import project4 from "./assets/ipact1.png";
+import project5 from "./assets/ipact2.png";
+import project6 from "./assets/ipact3.png";
+
+import project7 from "./assets/Axe1.png";
+import project8 from "./assets/axe2.png";
+import project9 from "./assets/axe3.png";
+import project10 from "./assets/axe4.png";
+
+import project11 from "./assets/login.png";
+import project12 from "./assets/landing.png";
+import project13 from "./assets/demande step1.png";
+import project14 from "./assets/dashboard_bmn.png";
+import project15 from "./assets/evaluation_financiere.png";
+import project16 from "./assets/checker.jpg";
+
+
 import profileImg  from "./assets/me_graduated.jpg";
-import { FaHome, FaUser, FaLaptopCode, FaFolderOpen,FaEnvelope, FaPhone, FaMapMarkerAlt ,FaArrowLeft, FaArrowRight, FaDownload, FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaHome, FaUser, FaLaptopCode, FaFolderOpen,FaEnvelope, FaPhone, FaMapMarkerAlt ,FaArrowLeft, FaArrowRight, FaDownload, FaGithub, FaLinkedin, FaExternalLinkSquareAlt, FaExternalLinkAlt } from "react-icons/fa";
 
 export default function App() {
 
 
 interface Project {
   title: string;
+  fullDescription: string;
   description: string;
-  image: string;
+  images: string[]; // <- now an array of images
   github: string;
+  company: string;
+   date: string; 
   
 }
 type ProjectCategory = "academic" | "professional";
 const [category, setCategory] = useState<ProjectCategory>("academic");
 const [currentSlide, setCurrentSlide] = useState<number>(0);
+ const [modalOpen, setModalOpen] = useState(false);
+const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 useEffect(() => {
   const sections = document.querySelectorAll(".reveal-section");
 
@@ -43,51 +66,12 @@ useEffect(() => {
 }, []);
 
 
-/*   const projectsDatas = {
-  academic: [
-    {
-      title: "Symptom Checker",
-      description: "AI medical chatbot analyzing 500+ symptoms.",
-      image: "/assets/symptom.png",
-      github: "#"
-    },
-    {
-      title: "TektAI",
-      description: "NestJS backend and ReactJS frontend for scalable platform.",
-      image: "/assets/tektai.png",
-      github: "#"
-    },
-    {
-      title: "AutoXpress",
-      description: "Cross-platform carpooling solution reducing commute costs.",
-      image: "/assets/autoxpress.png",
-      github: "#"
-    }
-  ],
-  professional: [
-    {
-      title: "CRM Platform",
-      description: "Industrial CRM platform improving client tracking by 25%.",
-      image: "/assets/crm.png",
-      github: "#"
-    },
-    {
-      title: "Project Management System",
-      description: "Angular & Spring Boot system increasing task visibility by 25%.",
-      image: "/assets/projectmgmt.png",
-      github: "#"
-    },
-    {
-      title: "Bank Platform",
-      description: "Internal platform optimization for 200+ client profiles.",
-      image: "/assets/bank.png",
-      github: "#"
-    }
-  ]
+
+ 
+const handleMoreInfo = (proj: Project) => {
+  setSelectedProject(proj);
+  setModalOpen(true);
 };
- */
-
-
 
 
 
@@ -96,20 +80,146 @@ const [loading, setLoading] = useState(false);
 
 const projectsData: Record<ProjectCategory, Project[]> = {
   academic: [
-    { title: "Symptom Checker", description: "AI medical chatbot analyzing 500+ symptoms.", image: project1, github: "#" },
-    { title: "TektAI", description: "NestJS backend and ReactJS frontend for scalable platform.", image: project2, github: "#" },
-    { title: "AutoXpress", description: "Cross-platform carpooling solution reducing commute costs.", image: project1, github: "#" }
+    {
+      title: "Web Application Development Project – Symptom Checker",
+      description: "AI medical chatbot analyzing 500+ symptoms.",
+      fullDescription: ` 
+      Worked with a team to build a Symptom Checker web application using Django.
+      Integrated AI chatbot (Gemini) for enhanced user interaction.             `,
+      company: "ESPRIT",
+      date: "Oct 2024",
+      images: [project16],
+      github: "https://github.com/Imen-Frigui/Symptom_Checker"
+    },
+
+    {
+      title: "UI/UX Design : CinéMatch App",
+      description: "Designed a mobile app Using AdobeXD and Figma .",
+      fullDescription: ` 
+      Designed a mobile app that simplifies group movie decisions through voting and personalized recommendations, aimed at promoting Tunisian cinema among young adults. Developed engaging UI/UX features, including custom notification settings and collaborative voting functionality, for a seamless social experience.  `,
+      company: "ESPRIT",
+      date: "Oct 2024",
+      images: [project3],
+      github: "https://www.figma.com/design/MSJnfMqcPJJD8YT9AQjTos/Cin%C3%A9Match?node-id=0-1&node-type=canvas&t=vW3yuf5TVthc9HJ7-0"
+    },
+    {
+      title: "Web Application Development Project - TEKTAI",
+      description: " Contributed to the development of TektAI, a dynamic web platform fostering collaboration between industry and data science Developers.",
+      fullDescription: `
+      Implemented NestJS for the backend
+      Utilized ReactJSfor frontend development
+Integrated MongoDBas the database solution
+Contributed to the development of automated performance evaluation, team rankings,and a prize allocation process to enhanceuser engagement and innovation`,
+      company: "ESPRIT",
+      date: "January - May 2024",
+      images: [project2],
+      github: "https://github.com/AtefBadreddine/Tektai-Devtech-4TWIN2/tree/balkis"
+    },
+    {
+      title: "Web/Mobile/Desktop Development Project - AutoXpress",
+      description: "Cross-platform carpooling solution reducing commute costs.",
+      fullDescription:  `
+Development of a carpooling application available on Web, Mobile,and Desktop platforms
+Web development using Symfony.
+      Mobile development with Webservices and Codename One.   
+      Desktop development using JavaFX and Java
+Contributed to the development of automated performance evaluation, team rankings,and a prize allocation process to enhanceuser engagement and innovation`,
+     
+     
+      company: "ESPRIT",
+      date: "January - May 2023",
+      images: [project1],
+      github: "https://github.com/balkishmidi/autoxpress"
+    }
   ],
   professional: [
-    { title: "CRM Platform", description: "Industrial CRM platform improving client tracking by 25%.", image: project2, github: "#" },
-    { title: "Project Management System", description: "Angular & Spring Boot system increasing task visibility by 25%.", image: project1, github: "#" },
-    { title: "Bank Platform", description: "Internal platform optimization for 200+ client profiles.", image: project2, github: "#" }
+    {
+      title: "CRM Technical Consultant",
+      description: "Developed an industrial CRM platform with Angular and .NET supporting 50+ users.",
+      fullDescription: `
+- Developed an industrial CRM platform with Angular and .NET supporting 50+ users.
+- Automated 30% of business processes using PowerApps & Power Automate.
+- Launched Power BI dashboards reducing manual reporting time by 40%.
+- Strengthened platform security with multi-level authentication and role-based access controls.
+      `,
+      company: "INETUM Tunisia",
+      date: "Feb 2025 - Aug 2025",
+      images: [project11,project12,project13,project14,project15],
+      github: "https://github.com/balkishmidi/E-Industrie-Platfom"
+    },
+    {
+      title: "IPACT Consult Inc.",
+      description: "Web Developer Intern",
+      fullDescription: `
+- Built project management system (Angular, Spring Boot, MongoDB), increasing task visibility by 25%.
+- Improved code reliability via 85% unit test coverage & CI/CD automation.
+- Collaborated with UX designers to enhance dashboard usability.
+      `,
+      company: "IPACT Consult Inc.",
+      date: "Jun 2024 - Aug 2024",
+      images: [project4,project5,project6],
+      github: "https://github.com/zouhourkharraf/Manajero_ProjectManagement_AllMethodologies/tree/safe"
+    },
+
+    {
+      title: "AXE Finance",
+      description: "Mobile Developer Intern",
+      fullDescription: `
+- Designed a mobile credit app with improved UI/UX, increasing customer engagement by 20%.
+- Built front-end with Ionic & Angular; implemented RESTful APIs in .NET.
+- Optimized database structure and query performance.
+      `,
+      company: "AXE Finance",
+      date: "Feb 2022 - May 2022",
+      images: [project7,project8,project9,project10],
+      github: "#"
+    }
   ]
 };
 
+
+
+// Track current image for slider cards
+const [projectImgIndex, setProjectImgIndex] = useState<Record<number, number>>({});
 const projects = projectsData[category];
 
+useEffect(() => {
+  const interval = setInterval(() => {
+    setProjectImgIndex(prev => {
+      const newState = { ...prev };
+      projects.forEach((proj, i) => {
+        newState[i] = (prev[i] ?? 0) + 1;
+        if (newState[i] >= proj.images.length) newState[i] = 0;
+      });
+      return newState;
+    });
+  }, 2000);
+  return () => clearInterval(interval);
+}, [projects]);
 
+
+
+
+
+// Inside your component
+const [modalImgIndex, setModalImgIndex] = useState(0);
+const [animating, setAnimating] = useState(false);
+
+useEffect(() => {
+  if (!modalOpen || !selectedProject) return;
+
+  const interval = setInterval(() => {
+    setAnimating(true);
+    setTimeout(() => {
+      setModalImgIndex(prev => (prev + 1) % selectedProject.images.length);
+      setAnimating(false);
+    }, 500); // animation duration matches CSS
+  }, 5000); // every 5 seconds
+
+  return () => clearInterval(interval);
+}, [modalOpen, selectedProject]);
+
+   
 
   // Slideshow auto change every 5 seconds
   useEffect(() => {
@@ -396,58 +506,133 @@ useEffect(() => {
 
 
 
-<section id="projects" className="reveal-section">
-  <h3 className="section-title">Projects</h3>
+ {/* Modal */}
+{modalOpen && selectedProject && (
+  <div className="modal-overlay" onClick={() => setModalOpen(false)}>
+    <div className="modal-content" onClick={e => e.stopPropagation()}>
+      <button className="modal-close" onClick={() => setModalOpen(false)}>×</button>
 
-<div className="project-buttons">
-  <button
-    className={category === "academic" ? "active" : ""}
-    onClick={() => { setCategory("academic"); setCurrentSlide(0); }}
-  >
-    Academic Projects
-  </button>
-  <button
-    className={category === "professional" ? "active" : ""}
-    onClick={() => { setCategory("professional"); setCurrentSlide(0); }}
-  >
-    Professional Projects
-  </button>
+      {/* Top section: slideshow + info */}
+      <div className="modal-top">
+      <div className="modal-images">
+  {selectedProject.images.map((img, idx) => {
+    const isActive = idx === modalImgIndex;
+    return (
+      <img
+        key={idx}
+        src={img}
+        alt={`${selectedProject.title} screenshot ${idx + 1}`}
+        className={`modal-img ${isActive ? "active" : ""} ${animating ? "animating" : ""}`}
+      />
+    );
+  })}
 </div>
 
 
-  {/* Slider */}
-  <div className="project-slider">
-    <button className="arrow left" onClick={() => setCurrentSlide((prev) => (prev - 1 + projects.length) % projects.length)}>
-      <FaArrowLeft />
-    </button>
+        <div className="modal-info">
+          <h2>{selectedProject.title}</h2>
+          {selectedProject.company && selectedProject.date && (
+            <p className="company-date">{selectedProject.company} | {selectedProject.date}</p>
+          )}
+          <a href={selectedProject.github} target="_blank" rel="noreferrer" >
+            View on GitHub <FaExternalLinkAlt style={{ marginRight: "0.5rem" }} />
 
-    <div className="project-cards">
-      {projects.map((proj, index) => {
-        // show 3 cards in rotation
-        const isVisible =
-          index === currentSlide ||
-          index === (currentSlide + 1) % projects.length ||
-          index === (currentSlide + 2) % projects.length;
-        return isVisible ? (
-          <div className="project-card" key={index}>
-            <img src={proj.image} alt={proj.title} />
-            <h4>{proj.title}</h4>
-            <p>{proj.description}</p>
-            <a href={proj.github} target="_blank" rel="noreferrer" className="github-btn">
+          </a>
+        </div>
+      </div>
+
+      {/* Full-width description below */}
+{selectedProject.fullDescription && (
+  <ul className="modal-description">
+    {selectedProject.fullDescription
+      .trim()
+      .split("\n")           // split by newline
+      .filter(line => line)  // remove empty lines
+      .map((line, idx) => (
+        <li key={idx}>{line.replace(/^- /, "")}</li> // remove leading dash & space
+      ))
+    }
+  </ul>
+)}
+    </div>
+  </div>
+)}
+
+      {/* PROJECTS */}
+      <section id="projects" className="reveal-section">
+        <h3 className="section-title">Projects</h3>
+
+        <div className="project-buttons">
+          <button
+            className={category === "academic" ? "active" : ""}
+            onClick={() => { setCategory("academic"); setCurrentSlide(0); }}
+          >
+            Academic Projects
+          </button>
+          <button
+            className={category === "professional" ? "active" : ""}
+            onClick={() => { setCategory("professional"); setCurrentSlide(0); }}
+          >
+            Professional Projects
+          </button>
+        </div>
+
+        {/* Slider */}
+ {/* Slider */}
+<div className="project-slider">
+  <button
+    className="arrow left"
+    onClick={() =>
+      setCurrentSlide(
+        (prev) => (prev - 2 + projects.length) % projects.length
+      )
+    }
+  >
+    <FaArrowLeft />
+  </button>
+
+  <div className="project-cards">
+    {projects.map((proj, index) => {
+      // Show 2 cards at a time
+      const isVisible =
+        index === currentSlide ||
+        index === (currentSlide + 1) % projects.length;
+
+      return isVisible ? (
+        <div className="project-card" key={index}>
+          <img
+            src={proj.images[projectImgIndex[index] ?? 0]}
+            alt={`${proj.title} screenshot`}
+          />
+          <h4>{proj.title}</h4>
+          {proj.company && proj.date && (
+            <div className="company-date">{proj.company} | {proj.date}</div>
+          )}
+          <p>{proj.description}</p>
+          <div className="project-actions">
+            <button onClick={() => handleMoreInfo(proj)} className="more-btn">
+              Learn More
+            </button>
+            <a href={proj.github} target="_blank" className="github-btn">
               <FaGithub /> GitHub
             </a>
           </div>
-        ) : null;
-      })}
-    </div>
-
-    <button className="arrow right" onClick={() => setCurrentSlide((prev) => (prev + 1) % projects.length)}>
-      <FaArrowRight />
-    </button>
+        </div>
+      ) : null;
+    })}
   </div>
-</section>
 
+  <button
+    className="arrow right"
+    onClick={() =>
+      setCurrentSlide((prev) => (prev + 2) % projects.length)
+    }
+  >
+    <FaArrowRight />
+  </button>
+</div>
 
+      </section>
 
 
  <section id="contact" className="contact-section reveal-section">
@@ -476,7 +661,7 @@ useEffect(() => {
       alt="Tunisia"
       style={{ width: "20px", marginRight: "0.5rem", verticalAlign: "middle" }}
     />
-    <a href="tel:+21612345678">+216 12 345 678</a>
+    <a href="tel:+21612345678">+216 52 259 276</a>
   </div>
 
 
