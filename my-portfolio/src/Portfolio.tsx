@@ -529,6 +529,9 @@ useEffect(() => {
 </div>
 
 
+
+
+
         <div className="modal-info">
           <h2>{selectedProject.title}</h2>
           {selectedProject.company && selectedProject.date && (
@@ -557,6 +560,16 @@ useEffect(() => {
     </div>
   </div>
 )}
+
+
+
+
+
+
+
+
+
+
 
       {/* PROJECTS */}
       <section id="projects" className="reveal-section">

@@ -169,7 +169,7 @@ header nav a:hover {
 
 .scroll-to-top {
   position: fixed;
-  bottom: 30px;
+  bottom: 80px;
   right: 30px;
   width: 50px;
   height: 50px;
@@ -234,6 +234,93 @@ h2, h3 { color: #c084fc; margin-bottom: 1rem; }
   box-shadow: 0 0 15px rgba(200,130,252,0.5);
   min-width: 200px;
 }
+
+
+/* Mobile responsive adjustments for About section */
+@media (max-width: 768px) {
+  /* About section base */
+#about {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+}
+
+#about img {
+  width: 100%;          /* take full width of container */
+  max-width: 250px;     /* limit maximum size for desktop */
+  height: auto;         /* maintain aspect ratio */
+  border-radius: 15px;
+}
+
+#about .about-text {
+  flex: 1;
+}
+
+/* Skills container */
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.skill-card {
+  background: rgba(0,0,0,0.6);
+  padding: 1rem 2rem;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(200,130,252,0.5);
+  min-width: 200px;
+}
+}
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  #about {
+    flex-direction: column;       /* stack image and text vertically */
+    align-items: center;          /* center all content */
+    text-align: center;           /* center text */
+    gap: 1.5rem;
+  }
+
+  #about img {
+    max-width: 180px;             /* smaller image for mobile */
+    width: 50%;                   /* scale relative to container */
+    margin: 0 auto;               /* center the image */
+  }
+
+  #about .about-text {
+    flex: unset;
+  }
+
+  #about .skill-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  #about .skill-card {
+    min-width: 140px;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Extra small phones */
+@media (max-width: 480px) {
+  #about img {
+    max-width: 140px;
+    width: 60%;
+  }
+
+  #about .skill-card {
+    min-width: 120px;
+    font-size: 0.8rem;
+  }
+}
+
+
+
 
 /* Project slideshow */
 .project-slideshow {
@@ -1045,6 +1132,61 @@ background: linear-gradient(90deg, #ff4ec5, #b13cff);
   object-fit: contain;
 }
 
+/* Hide mobile orbit on desktop */
+.mobile-orbit { display: none; }
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .web-orbit { display: none; }
+  .mobile-orbit { display: block; }
+
+  .mobile-orbit .hero-orbit-wrapper {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  margin: auto;
+  }
+
+  .mobile-orbit .orbit-logo {
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 0; /* remove previous negative margin */
+    transform: rotate(var(--angle)) translate(90px) rotate(calc(-1 * var(--angle)));
+  }
+
+  .mobile-orbit .logo-circle {
+ width: 30px;
+  height: 30px;
+  border-radius: 50%;       /* makes it a circle */
+  background-color: #ae0f0f00;   /* dark gray background */
+ 
+  box-shadow: 0 0 0px rgba(0,0,0,0.6); /* shadow around circle */
+
+    margin: -0%; /* perfectly center circle inside orbit-logo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mobile-orbit .logo-circle img {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+
+/* Hide the hero-right section on screens 768px and below */
+@media (max-width: 768px) {
+  .hero-right {
+    display: none;
+  }
+}
+
+
+
+
 /* PROJECT BUTTONS */
 .project-buttons {
   display: flex;
@@ -1262,26 +1404,4 @@ background: linear-gradient(90deg, #ff4ec5, #b13cff);
 }
 
 
-/* Responsive for tablets & mobile */
-@media (max-width: 768px) {
-  .modal-top {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
 
-  .modal-images {
-    width: 90%;
-    max-width: 300px;
-    height: 180px;
-    margin-bottom: 1rem;
-  }
-
-  .modal-info {
-    align-items: center;
-  }
-
-  .modal-info h2 {
-    font-size: 1.3rem;
-  }
-}
