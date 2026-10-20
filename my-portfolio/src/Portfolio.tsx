@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Github, Linkedin, Mail, Phone, ExternalLink, ChevronDown, Code, Briefcase, GraduationCap, Award, Menu, X, Download, Sparkles, Rocket, Zap, ArrowUp, Terminal } from 'lucide-react';
 import './index.css';
-import profilehero from "./assets/balkis_img.png";
+import profilehero from "./assets/balkisimg.png";
 
 const Portfolio = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -369,7 +369,7 @@ const Portfolio = () => {
                 <ChevronDown size={20} className="chevron-icon" />
               </button>
               
-              <a href="/Resume_BalkisHmidi.pdf" download className="btn-secondary">
+              <a href="/Balkis_Hmidi_CV_Francais.pdf" download className="btn-secondary">
                 <Download size={20} />
                 Download CV
               </a>
